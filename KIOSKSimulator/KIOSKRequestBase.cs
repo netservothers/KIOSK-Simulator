@@ -6,7 +6,7 @@ namespace KIOSKSimulator
 {
 	public abstract class KIOSKRequestBase
 	{
-		protected POSRequestBase()
+		protected KIOSKRequestBase()
 		{
 
 		}

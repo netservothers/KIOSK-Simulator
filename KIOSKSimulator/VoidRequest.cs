@@ -12,12 +12,12 @@ namespace KIOSKSimulator
 		}
 		public override string RequestType
 		{
-			get { return POSConstants.MessageType_Void; }
+			get { return KIOSKConstants.MessageType_Void; }
 		}
 
-        public override string MandatoryField => POSConstants.FieldType_InvoiceNumber;
+        public override string MandatoryField => KIOSKConstants.FieldType_InvoiceNumber;
 
-        public override string OptionalField => POSConstants.FieldType_AcquirerSelection;
+        public override string OptionalField => KIOSKConstants.FieldType_AcquirerSelection;
 
         public string InvoiceNumber { get; set; }
 
@@ -28,10 +28,10 @@ namespace KIOSKSimulator
             if (RequestMessage.Substring(21, 2).ToString() == MandatoryField)
             {
                 InvoiceNumber = RequestMessage.Substring(25, 6).ToString();
-                return POSConstants.ControlByte_Ack;
+                return KIOSKConstants.ControlByte_Ack;
             }
 
-            return POSConstants.ControlByte_Nack;
+            return KIOSKConstants.ControlByte_Nack;
 
         }
     }

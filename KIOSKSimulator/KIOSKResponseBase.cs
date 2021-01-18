@@ -8,7 +8,7 @@ namespace KIOSKSimulator
 	{
 		private readonly IList<string> _Fields;
 
-		protected POSResponseBase(IList<string> fieldValues)
+		protected KIOSKResponseBase(IList<string> fieldValues)
 		{
 			_Fields = fieldValues;
 		}

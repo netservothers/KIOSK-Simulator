@@ -7,7 +7,7 @@ namespace KIOSKSimulator
 
 		public PurchaseResponse(IList<string> fieldValues) : base(fieldValues) { }
 
-		public override string RequestType => POSConstants.MessageType_Purchase;
+		public override string RequestType => KIOSKConstants.MessageType_Purchase;
 
 
     }

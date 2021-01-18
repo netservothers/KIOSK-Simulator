@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KIOSKConstants.cs" />
     <Compile Include="KIOSKSimulator.cs" />
     <Compile Include="KIOSKRequestBase.cs" />
     <Compile Include="KIOSKResponseBase.cs" />

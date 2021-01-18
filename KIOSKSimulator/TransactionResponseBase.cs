@@ -9,7 +9,7 @@ namespace KIOSKSimulator
 
         protected TransactionResponseBase(IList<string> fieldValues) : base(fieldValues) { }
 
-        public override string RequestType { get { return POSConstants.MessageType_Purchase; } }
+        public override string RequestType { get { return KIOSKConstants.MessageType_Purchase; } }
 
         public decimal PurchaseAmount { get { return ToDecimalOrZero(Fields[3]); } }
 
@@ -35,7 +35,7 @@ namespace KIOSKSimulator
 
         private int GetIndex(int rawIndex)
         {
-            return this.RequestType == POSConstants.MessageType_Purchase ? rawIndex : rawIndex - 1;
+            return this.RequestType == KIOSKConstants.MessageType_Purchase ? rawIndex : rawIndex - 1;
         }
 
         internal static decimal ToDecimalOrZero(string value)

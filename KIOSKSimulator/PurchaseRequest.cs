@@ -10,11 +10,11 @@ namespace KIOSKSimulator
 		{
 
 		}
-        public override string RequestType => POSConstants.MessageType_Purchase;
+        public override string RequestType => KIOSKConstants.MessageType_Purchase;
 
-        public override string MandatoryField => POSConstants.FieldType_Amount;
+        public override string MandatoryField => KIOSKConstants.FieldType_Amount;
 
-        public override string OptionalField => POSConstants.FieldType_AcquirerSelection;
+        public override string OptionalField => KIOSKConstants.FieldType_AcquirerSelection;
 
         public decimal Amount { get; set; }
 
@@ -25,9 +25,9 @@ namespace KIOSKSimulator
             if (RequestMessage.Substring(21, 2).ToString() == MandatoryField)
             {
                 Amount = Convert.ToDecimal(RequestMessage.Substring(25, 12).ToString());
-                return POSConstants.ControlByte_Ack;
+                return KIOSKConstants.ControlByte_Ack;
             }
-            return POSConstants.ControlByte_Nack;
+            return KIOSKConstants.ControlByte_Nack;
         }
 
 	}

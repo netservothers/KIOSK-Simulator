@@ -8,6 +8,6 @@ namespace KIOSKSimulator
 	{
 		public VoidResponse(IList<string> fieldValues) : base(fieldValues) { }
 
-		public override string RequestType { get { return POSConstants.MessageType_Void; } }
+		public override string RequestType { get { return KIOSKConstants.MessageType_Void; } }
 	}
 }
