@@ -13,7 +13,12 @@ namespace KIOSKSimulator
 			_Fields = fieldValues;
 		}
 
-	    public abstract string RequestType { get; }
+        protected KIOSKResponseBase()
+        {
+          
+        }
+
+        public abstract string RequestType { get; }
 
 		protected IList<string> Fields { get { return _Fields; } }
 
@@ -23,5 +28,17 @@ namespace KIOSKSimulator
 
 			return null;
 		}
+
+        public enum ResponseCode
+        {
+            Transactioncancelled = 000,
+            Brokenpipe = 001,
+            InvalidFormat = 002,
+            InvalidDataLength =003,
+            TransactionSuccess = 100,
+            InvalidDeveloperID  =900,
+            MPOSNotactivated  = 901,
+            LoginRequired  =902
+        }
 	}
 }

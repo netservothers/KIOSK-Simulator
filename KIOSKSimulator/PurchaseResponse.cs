@@ -4,10 +4,14 @@ namespace KIOSKSimulator
 {
     public sealed class PurchaseResponse : TransactionResponseBase
     {
-
 		public PurchaseResponse(IList<string> fieldValues) : base(fieldValues) { }
 
-		public override string RequestType => KIOSKConstants.MessageType_Purchase;
+        public PurchaseResponse() : base()
+        {
+
+        }
+
+        public override string RequestType => KIOSKConstants.VoidResponseActionCode;
 
 
     }

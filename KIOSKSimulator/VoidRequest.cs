@@ -12,27 +12,33 @@ namespace KIOSKSimulator
 		}
 		public override string RequestType
 		{
-			get { return KIOSKConstants.MessageType_Void; }
+			get { return KIOSKConstants.VoidRequestActionCode; }
 		}
 
-        public override string MandatoryField => KIOSKConstants.FieldType_InvoiceNumber;
+        public string MandatoryTransactionField => KIOSKTags.TransactionID;
 
-        public override string OptionalField => KIOSKConstants.FieldType_AcquirerSelection;
+        public string MandatoryReferenceField => KIOSKTags.ReferenceNumber;
 
-        public string InvoiceNumber { get; set; }
+        public string MandatoryVoidField => KIOSKTags.VoidType;
 
-		public string Id { get; set; }
+        public string TransactionID { get; set; }
 
-        public byte Validate(string RequestMessage)
+        public string ReferenceNumber { get; set; }
+
+        public string VoidType { get; set; }
+
+        public string Id { get; set; }
+
+        public bool Validate(List<Tlv> tLVRequestlist)
         {
-            if (RequestMessage.Substring(21, 2).ToString() == MandatoryField)
+            foreach (Tlv tlvField in tLVRequestlist)
             {
-                InvoiceNumber = RequestMessage.Substring(25, 6).ToString();
-                return KIOSKConstants.ControlByte_Ack;
+                TransactionID = ((tlvField.Tag == MandatoryTransactionField) && !string.IsNullOrEmpty(tlvField.Data)) ? tlvField.Data : string.Empty;
+                ReferenceNumber = ((tlvField.Tag == MandatoryReferenceField) && !string.IsNullOrEmpty(tlvField.Data)) ? tlvField.Data : string.Empty;
+                VoidType = ((tlvField.Tag == MandatoryVoidField) && !string.IsNullOrEmpty(tlvField.Data)) ? tlvField.Data : string.Empty;
+                return true;
             }
-
-            return KIOSKConstants.ControlByte_Nack;
-
+            return false;
         }
     }
 }

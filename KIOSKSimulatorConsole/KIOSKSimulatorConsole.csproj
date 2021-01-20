@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A6EB422D-A789-477D-BF09-4199E46A52C6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KIOSKSimulator</RootNamespace>
-    <AssemblyName>KIOSKSimulator</AssemblyName>
+    <ProjectGuid>{9272F802-D7E9-4BA1-B946-3E6B430F9ACD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KIOSKSimulatorConsole</RootNamespace>
+    <AssemblyName>KIOSKSimulatorConsole</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,11 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BerTlv, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BerTlv.NET.2.0.3\lib\net45\BerTlv.dll</HintPath>
-    </Reference>
-    <Reference Include="Greensoft.TlvLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TlvLib.1.0.0\lib\net40\Greensoft.TlvLib.dll</HintPath>
+    <Reference Include="KIOSKSimulator">
+      <HintPath>..\KIOSKSimulator\bin\Debug\KIOSKSimulator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,19 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KIOSKConstants.cs" />
-    <Compile Include="KIOSKSimulator.cs" />
-    <Compile Include="KIOSKRequestBase.cs" />
-    <Compile Include="KIOSKResponseBase.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseRequest.cs" />
-    <Compile Include="PurchaseResponse.cs" />
-    <Compile Include="TransactionResponseBase.cs" />
-    <Compile Include="VoidRequest.cs" />
-    <Compile Include="VoidResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

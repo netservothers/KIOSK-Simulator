@@ -14,16 +14,10 @@ namespace KIOSKSimulator
 		{
 			get;
 		}
-
-        public abstract string MandatoryField
-        {
-            get;
-        }
-
-        public abstract string OptionalField
-        {
-            get;
-        }
+        //public abstract string OptionalField
+        //{
+        //    get;
+        //}
 
     }
 }
