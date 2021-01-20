@@ -44,6 +44,9 @@ namespace KIOSKSimulator
         public const string SaleResponseActionCode = "A1";
         public const string VoidResponseActionCode = "A3";
 
+        public const string HexaDecimalFormat = "X2";
+
+
         public const int MaxNackRetries = 3;
 
         public const int ValidMesage_MinBytes = 5;

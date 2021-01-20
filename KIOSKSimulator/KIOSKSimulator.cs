@@ -87,9 +87,6 @@ namespace KIOSKSimulator
         private string ProcessPurchaseResponse()
         {
             PurchaseResponse purchaseRespose = new PurchaseResponse();
-
-
-
             return string.Empty;
         }
 
@@ -117,7 +114,16 @@ namespace KIOSKSimulator
                 uint.Parse(purchaseRespose.MandatoryReferenceField, NumberStyles.HexNumber),
                 Encoding.Default.GetBytes(voidRequest.ReferenceNumber));
 
-            return string.Empty;
+            this.MemoryStream.Position = 0;
+            var buf = new byte[this.MemoryStream.Length];
+            this.MemoryStream.Read(buf, 0, buf.Length);
+
+            var messageToPort =
+                BuildHexMessage(
+                    BitConverter.ToString(buf).Replace("-", string.Empty),
+                    this.actualLength);
+
+            return messageToPort;
         }
 
 
@@ -157,7 +163,7 @@ namespace KIOSKSimulator
             return TLVRequestlist;
         }
 
-        public static byte[] StringToByteArray(String hex)
+        private static byte[] StringToByteArray(String hex)
         {
             int NumberChars = hex.Length;
             byte[] bytes = new byte[NumberChars / 2];
@@ -165,8 +171,67 @@ namespace KIOSKSimulator
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
         }
-        #endregion
 
+        /// <summary>
+        /// To Build hex message which is an input to the COM port.
+        /// </summary>
+        /// <param name="hexString"> Hex string</param>
+        /// <param name="actualLength"> Actual Message Length</param>
+        /// <returns> Hex string. </returns>
+        public string BuildHexMessage(string hexString, int actualLength)
+        {
+            string message = string.Empty;
 
+            string messageHeader = KIOSKConstants.KioskMessageHeader;
+
+            string messageLength = actualLength.ToString();
+
+            message = messageHeader + messageLength + hexString;
+
+            message = message + this.LRCCalculation(message);
+
+            return message;
+        }
+
+        /// <summary>
+        /// To calculate LRC of the input data.
+        /// /// </summary>
+        /// <param name="data"> input data.</param>
+        /// <returns> lrc. </returns>
+        private string LRCCalculation(string data)
+        {
+            int checksum = 0;
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                foreach (char c in this.GetStringFromHex(data))
+                {
+                    checksum ^= Convert.ToByte(c);
+                }
+            }
+
+            return checksum.ToString(KIOSKConstants.HexaDecimalFormat);
+        }
+
+        /// <summary>
+        /// Supporting Function used in LRC function.
+        /// </summary>
+        /// <param name="hexString"> hexadecimal String.</param>
+        /// <returns>result string.</returns>
+        private string GetStringFromHex(string hexString)
+        {
+            string result = string.Empty;
+            string s2 = hexString.Replace(" ", string.Empty);
+            for (int i = 0; i < s2.Length; i += 2)
+            {
+                result += Convert.ToChar(int.Parse(s2.Substring(i, 2), System.Globalization.NumberStyles.HexNumber));
+            }
+
+            return result;
+        }
     }
+    #endregion
+
+
+}
 }
